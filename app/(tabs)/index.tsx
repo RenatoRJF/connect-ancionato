@@ -1,70 +1,204 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import Pdf from "react-native-pdf";
+import { Image, StyleSheet, View, FlatList } from "react-native";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+import ParallaxScrollView from "@/components/ParallaxScrollView";
+
+const bibleComments = [
+  {
+    id: "1",
+    title: "Introduçã à Bíblia",
+    cover: require("@/assets/images/book-covers/intro-to-bible.png"),
+  },
+  {
+    id: "2",
+    title: "C. B. internacional",
+    cover: require("@/assets/images/book-covers/comentario-biblico-internacional.png"),
+  },
+];
+
+const discipleship = [
+  {
+    id: "1",
+    title: "D. que transforma",
+    cover: require("@/assets/images/book-covers/discipulado-que-transforma.png"),
+  },
+];
+
+const leadership = [
+  {
+    id: "1",
+    title: "S. estão me seguindo",
+    cover: require("@/assets/images/book-covers/socorro-estao-me-seguindo.png"),
+  },
+];
+
+const coaching = [
+  {
+    id: "1",
+    title: "Guia do ancionato",
+    cover: require("@/assets/images/book-covers/guia-do-ancionato.png"),
+  },
+];
+
+const onlineSource = {
+  uri: "../../assets/pdfs/CBIASD-gênesis.pdf",
+};
 
 export default function HomeScreen() {
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+      headerBackgroundColor={{ light: "#000000", dark: "#000000" }}
       headerImage={
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+          style={styles.banner}
+          source={require("@/assets/images/impacto_2024.jpg")}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
+      }
+    >
+      <ThemedView>
+        <ThemedText type="title">Connect Ancionato</ThemedText>
       </ThemedView>
+
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
+        <ThemedText type="subtitle">Comentário bíblico</ThemedText>
+
+        <FlatList
+          horizontal
+          data={bibleComments}
+          keyExtractor={({ id }) => id}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <View style={styles.materialCard}>
+              <ThemedText style={styles.coverImageContainer}>
+                <Image source={item.cover} style={styles.coverImage} />
+              </ThemedText>
+
+              <ThemedText type="defaultSemiBold" style={styles.materialTitle}>
+                {item.title}
+              </ThemedText>
+            </View>
+          )}
+        />
       </ThemedView>
+
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
+        <ThemedText type="subtitle">Discipulado</ThemedText>
+
+        <FlatList
+          horizontal
+          data={coaching}
+          keyExtractor={({ id }) => id}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <View style={styles.materialCard}>
+              <ThemedText style={styles.coverImageContainer}>
+                <Image source={item.cover} style={styles.coverImage} />
+              </ThemedText>
+
+              <ThemedText type="defaultSemiBold" style={styles.materialTitle}>
+                {item.title}
+              </ThemedText>
+            </View>
+          )}
+        />
       </ThemedView>
+
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
+        <ThemedText type="subtitle">Liderança</ThemedText>
+
+        <FlatList
+          horizontal
+          data={leadership}
+          keyExtractor={({ id }) => id}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <View style={styles.materialCard}>
+              <ThemedText style={styles.coverImageContainer}>
+                <Image source={item.cover} style={styles.coverImage} />
+              </ThemedText>
+
+              <ThemedText type="defaultSemiBold" style={styles.materialTitle}>
+                {item.title}
+              </ThemedText>
+            </View>
+          )}
+        />
+      </ThemedView>
+
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Treinamento</ThemedText>
+
+        <FlatList
+          horizontal
+          data={discipleship}
+          keyExtractor={({ id }) => id}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <View style={styles.materialCard}>
+              <ThemedText style={styles.coverImageContainer}>
+                <Image source={item.cover} style={styles.coverImage} />
+              </ThemedText>
+
+              <ThemedText type="defaultSemiBold" style={styles.materialTitle}>
+                {item.title}
+              </ThemedText>
+            </View>
+          )}
+        />
+      </ThemedView>
+
+      <ThemedView style={styles.pdfContainerHeight}>
+        <Pdf style={styles.pdfStyle} source={onlineSource} />
       </ThemedView>
     </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
   stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+    gap: 16,
+    marginBottom: 16,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
+  banner: {
+    height: "100%",
+    width: "100%",
     bottom: 0,
     left: 0,
-    position: 'absolute',
+    position: "absolute",
   },
+  materialCard: {
+    width: 200,
+    height: 300,
+    marginRight: 16,
+  },
+  coverImageContainer: {
+    width: 200,
+    flex: 1,
+    shadowOpacity: 0.15,
+    shadowColor: "#000",
+    shadowOffset: {
+      height: 5,
+      width: 2,
+    },
+  },
+  coverImage: {
+    width: 200,
+    height: "100%",
+  },
+  materialTitle: {
+    marginTop: 8,
+  },
+  pdfContainerHeight: {
+    height: 300
+  },
+  pdfStyle: {
+    flex: 1,
+    alignSelf: 'stretch'
+  }
 });
